@@ -23,7 +23,7 @@ public class TaxTest {
         RestAssured.port = 8082;
     }
     
-    @Test
+//    @Test
     public void whenUsePathParam_thenOK(){
         given().queryParam("phone", "081212345")
                 .when()
@@ -33,7 +33,7 @@ public class TaxTest {
     }
     
     //phone not found will return 404
-    @Test
+//    @Test
     public void whenRequestedPost_thenCreatedFailed(){
         Map<String, Object> request = new HashMap<>();
         request.put("tax_code", "1");
@@ -49,7 +49,7 @@ public class TaxTest {
     }
     
     //pattern taxCode is invalid will return 400
-    @Test
+//    @Test
     public void whenRequestedPost_thenCreatedFailedPattern(){
         Map<String, Object> request = new HashMap<>();
         request.put("tax_code", "test1");
@@ -64,7 +64,7 @@ public class TaxTest {
                 .statusCode(400);
     }
     
-    @Test
+//    @Test
     public void whenRequestedPost_thenCreated() {
         Map<String, Object> request = new HashMap<>();
         request.put("tax_code", "1");

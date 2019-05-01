@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import siahaan.com.tax.calculator.exception.ResourceNotFoundException;
 import siahaan.com.tax.calculator.model.Bill;
 import siahaan.com.tax.calculator.model.TaxRequest;
 import siahaan.com.tax.calculator.model.TaxResponse;
@@ -38,9 +39,10 @@ public class TaxController {
 
     @RequestMapping(method = RequestMethod.POST, value = "create")
     public ResponseEntity createTax(@Valid @RequestBody TaxRequest request, @RequestHeader("phone") String phone) throws Exception {
-        if (!StringUtils.isEmpty(phone)) {
-            request.setPhone(phone);
+        if (phone ==null || StringUtils.isEmpty(phone)) {
+            throw new ResourceNotFoundException("customer is not found");
         }
+        request.setPhone(phone);
         TaxResponse response = taxService.createTaxObject(request);
         return ResponseEntity.ok(response);
     }
